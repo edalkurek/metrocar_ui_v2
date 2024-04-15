@@ -1,24 +1,18 @@
 import { useEffect, useState } from "react";
-import CarAudi from "../images/cars-big/audia1.jpg";
-import CarGolf from "../images/cars-big/golf6.jpg";
-import CarToyota from "../images/cars-big/toyotacamry.jpg";
-import CarBmw from "../images/cars-big/bmw320.jpg";
-import CarMercedes from "../images/cars-big/benz.jpg";
-import CarPassat from "../images/cars-big/passatcc.jpg";
-import { IconCar, IconInfoCircleFilled, IconX } from "@tabler/icons-react";
+import { IconInfoCircleFilled, IconX } from "@tabler/icons-react";
 import { IconMapPinFilled } from "@tabler/icons-react";
 import { IconCalendarEvent } from "@tabler/icons-react";
+import axios from 'axios';
 
 function BookCar() {
   const [modal, setModal] = useState(false); //  class - active-modal
+  const [locations, setLocations] = useState([]);
 
   // booking car
-  const [carType, setCarType] = useState("");
   const [pickUp, setPickUp] = useState("");
   const [dropOff, setDropOff] = useState("");
   const [pickTime, setPickTime] = useState("");
   const [dropTime, setDropTime] = useState("");
-  const [carImg, setCarImg] = useState("");
 
   // modal infos
   const [name, setName] = useState("");
@@ -29,6 +23,16 @@ function BookCar() {
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
   const [zipcode, setZipCode] = useState("");
+
+  useEffect(() => {
+    axios.get('/locations') // API endpoint URL'nizi girin
+      .then(response => {
+        setLocations(response.data); // Gelen veriyi locations state'ine ata
+      })
+      .catch(error => {
+        console.error('Error fetching locations:', error);
+      });
+  }, []);
 
   // taking value of modal inputs
   const handleName = (e) => {
@@ -71,8 +75,7 @@ function BookCar() {
       pickUp === "" ||
       dropOff === "" ||
       pickTime === "" ||
-      dropTime === "" ||
-      carType === ""
+      dropTime === ""
     ) {
       errorMsg.style.display = "flex";
     } else {
@@ -101,10 +104,7 @@ function BookCar() {
   };
 
   // taking value of booking inputs
-  const handleCar = (e) => {
-    setCarType(e.target.value);
-    setCarImg(e.target.value);
-  };
+
 
   const handlePick = (e) => {
     setPickUp(e.target.value);
@@ -122,106 +122,34 @@ function BookCar() {
     setDropTime(e.target.value);
   };
 
-  // based on value name show car img
-  let imgUrl;
-  switch (carImg) {
-    case "Audi A1 S-Line":
-      imgUrl = CarAudi;
-      break;
-    case "VW Golf 6":
-      imgUrl = CarGolf;
-      break;
-    case "Toyota Camry":
-      imgUrl = CarToyota;
-      break;
-    case "BMW 320 ModernLine":
-      imgUrl = CarBmw;
-      break;
-    case "Mercedes-Benz GLK":
-      imgUrl = CarMercedes;
-      break;
-    case "VW Passat CC":
-      imgUrl = CarPassat;
-      break;
-    default:
-      imgUrl = "";
-  }
 
-  // hide message
-  const hideMessage = () => {
-    const doneMsg = document.querySelector(".booking-done");
-    doneMsg.style.display = "none";
-  };
 
   return (
     <>
       <section id="booking-section" className="book-section">
-        {/* overlay */}
-        <div
-          onClick={openModal}
-          className={`modal-overlay ${modal ? "active-modal" : ""}`}
-        ></div>
-
+        <div onClick={() => setModal(true)} className={`modal-overlay ${modal ? "active-modal" : ""}`}></div>
         <div className="container">
           <div className="book-content">
             <div className="book-content__box">
               <h2>Book a car</h2>
-
-              <p className="error-message">
-                All fields required! <IconX width={20} height={20} />
-              </p>
-
-              <p className="booking-done">
-                Check your email to confirm an order.{" "}
-                <IconX width={20} height={20} onClick={hideMessage} />
-              </p>
-
+              <p className="error-message">All fields required! <IconX width={20} height={20} /></p>
               <form className="box-form">
                 <div className="box-form__car-type">
-                  <label>
-                    <IconCar className="input-icon" /> &nbsp; Select Your Car
-                    Type <b>*</b>
-                  </label>
-                  <select value={carType} onChange={handleCar}>
-                    <option>Select your car type</option>
-                    <option value="Audi A1 S-Line">Audi A1 S-Line</option>
-                    <option value="VW Golf 6">VW Golf 6</option>
-                    <option value="Toyota Camry">Toyota Camry</option>
-                    <option value="BMW 320 ModernLine">
-                      BMW 320 ModernLine
-                    </option>
-                    <option value="Mercedes-Benz GLK">Mercedes-Benz GLK</option>
-                    <option value="VW Passat CC">VW Passat CC</option>
-                  </select>
-                </div>
-
-                <div className="box-form__car-type">
-                  <label>
-                    <IconMapPinFilled className="input-icon" /> &nbsp; Pick-up{" "}
-                    <b>*</b>
-                  </label>
+                  <label><IconMapPinFilled className="input-icon" /> &nbsp; Pick-up <b>*</b></label>
                   <select value={pickUp} onChange={handlePick}>
                     <option>Select pick up location</option>
-                    <option>Belgrade</option>
-                    <option>Novi Sad</option>
-                    <option>Nis</option>
-                    <option>Kragujevac</option>
-                    <option>Subotica</option>
+                    {locations.map((location) => (
+                      <option key={location.id} value={location.name}>{location.name}</option>
+                    ))}
                   </select>
                 </div>
-
                 <div className="box-form__car-type">
-                  <label>
-                    <IconMapPinFilled className="input-icon" /> &nbsp; Drop-of{" "}
-                    <b>*</b>
-                  </label>
+                  <label><IconMapPinFilled className="input-icon" /> &nbsp; Drop-off <b>*</b></label>
                   <select value={dropOff} onChange={handleDrop}>
                     <option>Select drop off location</option>
-                    <option>Novi Sad</option>
-                    <option>Belgrade</option>
-                    <option>Nis</option>
-                    <option>Kragujevac</option>
-                    <option>Subotica</option>
+                    {locations.map((location) => (
+                      <option key={location.id} value={location.name}>{location.name}</option>
+                    ))}
                   </select>
                 </div>
 
@@ -328,12 +256,6 @@ function BookCar() {
                 </div>
               </span>
             </div>
-          </div>
-          <div className="booking-modal__car-info__model">
-            <h5>
-              <span>Car -</span> {carType}
-            </h5>
-            {imgUrl && <img src={imgUrl} alt="car_img" />}
           </div>
         </div>
         {/* personal info */}
