@@ -593,22 +593,17 @@ body {
 }
 
 .booking-modal {
-  opacity: 0;
-  display: none;
+  /* Sabit pozisyonu ve dönüşümü kaldırıldı. */
+  display: flex;
   flex-direction: column;
-  position: fixed;
-  overflow-x: hidden;
-  overflow-y: scroll;
-  z-index: 999999999999;
-  top: 54%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 83rem;
-  height: 100vh;
-  border: 2px solid white;
-  background-color: rgb(255, 255, 255);
-  padding-right: 2px;
-  color: #010103;
+  width: auto; /* Modalın genişliğini sayfa genişliğine uyarladık. */
+  max-width: 83rem; /* İsteğe bağlı olarak maksimum genişlik belirleyebilirsiniz. */
+  margin: 0 auto; /* Sayfa içeriği ortalanacak. */
+  height: auto; /* Yükseklik otomatik olacak, böylece içerik boyutuna göre ayarlanacak. */
+  border: 2px solid white; /* İsteğe bağlı sınır. */
+  background-color: rgb(255, 255, 255); /* Arka plan rengi. */
+  padding: 1rem; /* İçerik etrafında biraz boşluk. */
+  color: #010103; /* Yazı rengi. */
 }
 
 @media (max-width: 800px) {

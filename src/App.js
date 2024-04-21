@@ -7,6 +7,9 @@ import Models from "./Pages/Models";
 import TestimonialsPage from "./Pages/TestimonialsPage";
 import Team from "./Pages/Team";
 import Contact from "./Pages/Contact";
+import Reservation from "./Pages/Reservation";
+import AvailableVehicle from "./Pages/AvailableVehicle";
+
 
 function App() {
   return (
@@ -19,6 +22,8 @@ function App() {
         <Route path="testimonials" element={<TestimonialsPage />} />
         <Route path="team" element={<Team />} />
         <Route path="contact" element={<Contact />} />
+        <Route path="reservation" element={<Reservation />} />
+        <Route path="availableVehicle" element={<AvailableVehicle />} />
       </Routes>
     </>
   );
