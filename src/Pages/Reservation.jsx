@@ -123,7 +123,7 @@ function Reservation(){
     {/* message */}
     <div className="booking-modal__message">
       <h4>
-        <IconInfoCircleFilled />Completing this reservation enquiry,
+        <IconInfoCircleFilled /> Upon completing this reservation enquiry,
         you will receive:
       </h4>
       <p>
