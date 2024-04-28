@@ -1,0 +1,28 @@
+@use "../global" as *;
+
+.info {
+  position: fixed;     /* Sabit pozisyon, elemanı belirli bir konumda tutar */
+  top: 35%;            /* Üstten itibaren %50 konumunda olacak */
+  left: 0;             /* Sol kenardan başlayacak */
+  transform: translateY(-50%); /* Y ekseninde %50 yukarı çekerek ortalar */
+  width: 250px;        /* Genişliği */
+  height: auto;        /* Yüksekliği içeriğe göre ayarlanır */
+  background-color: #fff; /* Arka plan rengi beyaz */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Gölge efekti */
+  z-index: 1000;       /* Z-index yüksek değeri, üstte kalmasını sağlar */
+  padding: 20px;       /* İç boşluk */
+  box-sizing: border-box; /* Padding'i genişliğe dahil et */
+  position: absolute;
+
+}
+
+/* Küçük ekranlarda (örneğin mobil cihazlar) stilin nasıl uygulanacağını belirleyen media query */
+@media (max-width: 768px) {
+  .info {
+    width: 100%;       /* Mobil cihazlarda tam genişlik kullan */
+    height: 100px;     /* Yüksekliği sabit bir değere ayarla */
+    top: 0;            /* Üst kenardan başla */
+    transform: translateY(0); /* Transform'u sıfırla */
+  }
+}
+

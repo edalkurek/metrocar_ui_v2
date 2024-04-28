@@ -1,20 +1,35 @@
-import {IconPhone} from "@tabler/icons-react";
-import CarImg1 from "../images/cars-big/audi-box.png";
-import CarImg2 from "../images/cars-big/golf6-box.png";
-import CarCard from "../components/CarCard";
-
-
-const data = [{name: 'Audi', image: CarImg1, price: 45}, {name: 'WV', image: CarImg2, price: 35}]
+import { useEffect, useState } from "react";
+import { IconPhone } from "@tabler/icons-react";
+import CarCard from "./CarCard";
+import axios from 'axios';
 
 function CarList(props) {
+    const [vehicles, setVehicles] = useState([]);
+
+    useEffect(() => {
+        fetchAvailableVehicles();
+    }, [props.pickTime, props.dropTime]);
+
+    const fetchAvailableVehicles = async () => {
+        try {
+            const response = await axios.get(`/vehicles/available?startDate=${props.pickTime}&endDate=${props.dropTime}`);
+            if (response.status === 200) {
+                setVehicles(response.data);
+            } else {
+                console.error('Failed to fetch available vehicles');
+            }
+        } catch (error) {
+            console.error('Error fetching available vehicles:', error);
+        }
+    };
+
     return (
         <>
             <div className="container">
                 <div className="models-div">
-                    {data.map((item, index) => {
-                        return <CarCard image={item.image} />
-                    })}
-
+                    {vehicles.map((vehicle, index) => (
+                        <CarCard key={index} vehicle={vehicle} />
+                    ))}
                 </div>
             </div>
             <div className="book-banner">

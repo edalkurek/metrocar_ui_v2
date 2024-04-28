@@ -5,6 +5,7 @@ import { IconMapPinFilled } from "@tabler/icons-react";
 function ReservationInfo(props) {
 
   return(
+    <div className="info">
     <div className="booking-modal__car-info">
     <div className="dates-div">
       <div className="booking-modal__car-info__dates">
@@ -54,6 +55,7 @@ function ReservationInfo(props) {
         </span>
       </div>
     </div>
+  </div>
   </div>
   );
 }

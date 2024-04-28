@@ -11,7 +11,7 @@ function AvailableVehicle() {
 
   return (
     <>
-      <section className="models-section">
+      <section>
         <HeroPages name="RESERVATION" />
 
         <ReservationInfo
@@ -20,7 +20,7 @@ function AvailableVehicle() {
           pickTime={pickTime}
           dropTime={dropTime}
         />
-        <CarList />
+        <CarList pickTime={pickTime} dropTime={dropTime} />
         <Footer />
       </section>
     </>
