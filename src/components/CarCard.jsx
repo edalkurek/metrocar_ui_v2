@@ -1,5 +1,4 @@
-import { IconCar, IconPhone, IconStar } from "@tabler/icons-react";
-import { Link } from "react-router-dom";
+import { IconCar} from "@tabler/icons-react";
 import CarImg1 from "../images/cars-big/audi-box.png";
 
 function CarCard(props) {

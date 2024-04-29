@@ -1,15 +1,9 @@
 import { useEffect, useState } from "react";
-import { IconInfoCircleFilled, IconX } from "@tabler/icons-react";
-import { IconMapPinFilled } from "@tabler/icons-react";
+import { IconInfoCircleFilled} from "@tabler/icons-react";
 
 function Reservation(){
     const [modal, setModal] = useState(false); //  class - active-modal
-  
-    // booking car
-    const [pickUp, setPickUp] = useState("");
-    const [dropOff, setDropOff] = useState("");
-    const [pickTime, setPickTime] = useState("");
-    const [dropTime, setDropTime] = useState("");
+
   
     // modal infos
     const [name, setName] = useState("");
@@ -53,25 +47,7 @@ function Reservation(){
   const handleZip = (e) => {
     setZipCode(e.target.value);
   };
-
-  // open modal when all inputs are fulfilled
-  const openModal = (e) => {
-    e.preventDefault();
-    const errorMsg = document.querySelector(".error-message");
-    if (
-      pickUp === "" ||
-      dropOff === "" ||
-      pickTime === "" ||
-      dropTime === ""
-    ) {
-      errorMsg.style.display = "flex";
-    } else {
-      setModal(!modal);
-      const modalDiv = document.querySelector(".booking-modal");
-      modalDiv.scroll(0, 0);
-      errorMsg.style.display = "none";
-    }
-  };
+  
 
   // disable page scroll when modal is displayed
   useEffect(() => {
@@ -90,24 +66,6 @@ function Reservation(){
     doneMsg.style.display = "flex";
   };
 
-  // taking value of booking inputs
-
-
-  const handlePick = (e) => {
-    setPickUp(e.target.value);
-  };
-
-  const handleDrop = (e) => {
-    setDropOff(e.target.value);
-  };
-
-  const handlePickTime = (e) => {
-    setPickTime(e.target.value);
-  };
-
-  const handleDropTime = (e) => {
-    setDropTime(e.target.value);
-  };
 
 
     return(<>
@@ -129,56 +87,7 @@ function Reservation(){
         toll-free customer support number.
       </p>
     </div>
-    <div className="booking-modal__car-info">
-      <div className="dates-div">
-        <div className="booking-modal__car-info__dates">
-          <h5>Location & Date</h5>
-          <span>
-            <IconMapPinFilled />
-            <div>
-              <h6>Pick-Up Date & Time</h6>
-              <p>
-                {pickTime} /{" "}
-                <input type="time" className="input-time"></input>
-              </p>
-            </div>
-          </span>
-        </div>
-
-        <div className="booking-modal__car-info__dates">
-          <span>
-            <IconMapPinFilled />
-            <div>
-              <h6>Drop-Off Date & Time</h6>
-              <p>
-                {dropTime} /{" "}
-                <input type="time" className="input-time"></input>
-              </p>
-            </div>
-          </span>
-        </div>
-
-        <div className="booking-modal__car-info__dates">
-          <span>
-            <IconMapPinFilled />
-            <div>
-              <h6>Pick-Up Location</h6>
-              <p>{pickUp}</p>
-            </div>
-          </span>
-        </div>
-
-        <div className="booking-modal__car-info__dates">
-          <span>
-            <IconMapPinFilled />
-            <div>
-              <h6>Drop-Off Location</h6>
-              <p>{dropOff}</p>
-            </div>
-          </span>
-        </div>
-      </div>
-    </div>
+    
     {/* personal info */}
     <div className="booking-modal__person-info">
       <h4>Personal Information</h4>
