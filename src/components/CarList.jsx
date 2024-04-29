@@ -28,7 +28,7 @@ function CarList(props) {
             <div className="container">
                 <div className="models-div">
                     {vehicles.map((vehicle, index) => (
-                        <CarCard key={index} vehicle={vehicle} />
+                        <CarCard key={index} vehicle={vehicle} onBook={props.onBook} />
                     ))}
                 </div>
             </div>

@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { IconInfoCircleFilled, IconX } from "@tabler/icons-react";
 import { IconMapPinFilled } from "@tabler/icons-react";
-import HeroPages from "../components/HeroPages";
 
 function Reservation(){
     const [modal, setModal] = useState(false); //  class - active-modal
@@ -112,7 +111,6 @@ function Reservation(){
 
 
     return(<>
-    <HeroPages name="RESERVATION" />
     <div className="container">
     <div className="book-content">
     <div className={`booking-modal ${modal ? "active-modal" : ""}`}>

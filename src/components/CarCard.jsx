@@ -3,7 +3,9 @@ import { Link } from "react-router-dom";
 import CarImg1 from "../images/cars-big/audi-box.png";
 
 function CarCard(props) {
-  const { vehicle } = props;
+  console.log(props)
+
+  const { vehicle, onBook } = props;
 
   return (
     <div className="models-div__box">
@@ -34,9 +36,7 @@ function CarCard(props) {
             </span>
           </div>
           <div className="models-div__box__descr__name-price__btn">
-            <Link onClick={() => window.scrollTo(0, 0)} to="/">
-              Book Ride
-            </Link>
+          <button onClick={onBook}>Book Ride</button>
           </div>
         </div>
       </div>
