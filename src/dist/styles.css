@@ -2088,4 +2088,60 @@ footer {
     top: 0; /* Üst kenardan başla */
     transform: translateY(0); /* Transform'u sıfırla */
   }
+}
+.rental-service-options {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 2rem;
+  background: #ffffff;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.rental-service-options h2 {
+  color: #010103;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+.rental-service-options ul {
+  list-style: none;
+  padding: 0;
+}
+.rental-service-options li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid #f8f8f8;
+  margin-bottom: 0.5rem;
+}
+.rental-service-options li:last-child {
+  border-bottom: none;
+}
+.rental-service-options input[type=checkbox] {
+  margin-right: 1rem;
+}
+.rental-service-options .price {
+  font-weight: bold;
+  color: #ff4d30;
+}
+@media (max-width: 768px) {
+  .rental-service-options {
+    padding: 1rem;
+  }
+  .rental-service-options ul {
+    padding: 0.5rem;
+  }
+  .rental-service-options li {
+    flex-direction: column;
+    text-align: center;
+    padding: 0.5rem;
+  }
+}
+@media (max-width: 480px) {
+  .rental-service-options h2 {
+    font-size: 1.2rem;
+  }
+  .rental-service-options .price {
+    font-size: 0.9rem;
+  }
 }/*# sourceMappingURL=styles.css.map */

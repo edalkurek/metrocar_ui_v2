@@ -5,35 +5,36 @@ import { useLocation } from "react-router-dom";
 import ReservationInfo from "../components/ReservationInfo";
 import CarList from "../components/CarList";
 import Reservation from "../components/Reservation";
+import Equipment from "../components/Equipment";
 
 function AvailableVehicle() {
-  const location = useLocation();
-  const { pickUp, dropOff, pickTime, dropTime } = location.state || {};
-  const [showReservation, setShowReservation] = useState(false);  // Durumu yönetmek için state tanımlama
+    const location = useLocation();
+    const { pickUp, dropOff, pickTime, dropTime } = location.state || {};
+    const [currentScreen, setCurrentScreen] = useState('CarList');  // Başlangıç ekranı olarak 'CarList'
 
-  return (
-    <>
-      <section>
-        <HeroPages name="RESERVATION" />
+    const navigateToEquipment = () => {
+        setCurrentScreen('Equipment');
+    };
 
-        <ReservationInfo
-          pickUp={pickUp}
-          dropOff={dropOff}
-          pickTime={pickTime}
-          dropTime={dropTime}
-        />
-        
-        {/* CarList ve Reservation bileşenlerini koşullu olarak göster */}
-        {!showReservation ? (
-          <CarList pickTime={pickTime} dropTime={dropTime} onBook={() => setShowReservation(true)} />
-        ) : (
-          <Reservation />
-        )}
+    const navigateToReservation = () => {
+        setCurrentScreen('Reservation');
+    };
 
-        <Footer />
-      </section>
-    </>
-  );
+    return (
+        <>
+            <section>
+                <HeroPages name="RESERVATION" />
+                <ReservationInfo pickUp={pickUp} dropOff={dropOff} pickTime={pickTime} dropTime={dropTime} />
+                
+                {/* Koşullu olarak gösterilecek bileşenler */}
+                {currentScreen === 'CarList' && <CarList pickTime={pickTime} dropTime={dropTime} onBook={navigateToEquipment} />}
+                {currentScreen === 'Equipment' && <Equipment onSubmit={navigateToReservation} />}
+                {currentScreen === 'Reservation' && <Reservation />}
+                
+                <Footer />
+            </section>
+        </>
+    );
 }
 
 export default AvailableVehicle;

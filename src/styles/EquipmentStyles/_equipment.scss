@@ -1,0 +1,64 @@
+@use "../global" as *;  // global.scss dosyanızdan renkleri ve diğer değişkenleri içe aktarır
+
+.rental-service-options {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 2rem;
+  background: $bg-white; // Beyaz arka plan rengi
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+
+  h2 {
+    color: $text-black; // Siyah başlık rengi
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid $bg-gray; // Gri çerçeve rengi
+    margin-bottom: 0.5rem;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  input[type="checkbox"] {
+    margin-right: 1rem;
+  }
+
+  .price {
+    font-weight: bold;
+    color: $text-orange; // Fiyat için turuncu renk
+  }
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+    ul {
+      padding: 0.5rem;
+    }
+    li {
+      flex-direction: column;
+      text-align: center;
+      padding: 0.5rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    h2 {
+      font-size: 1.2rem;
+    }
+    .price {
+      font-size: 0.9rem;
+    }
+  }
+}
