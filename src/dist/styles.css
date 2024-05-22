@@ -2089,59 +2089,71 @@ footer {
     transform: translateY(0); /* Transform'u sıfırla */
   }
 }
-.rental-service-options {
-  max-width: 80rem;
-  margin: 0 auto;
+.equipment {
+  max-width: 120rem;
+  background-color: #f7f7f7;
+  border: 1px solid #e1e1e1;
   padding: 2rem;
-  background: #ffffff;
-  border-radius: 0.5rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  border-radius: 8px;
+  margin: 0 auto;
 }
-.rental-service-options h2 {
-  color: #010103;
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
+.equipment h2 {
+  color: #333;
+  font-size: 18px;
+  font-weight: bold;
 }
-.rental-service-options ul {
+.equipment .services-list, .equipment .extras-list, .equipment .insurance-list {
   list-style: none;
   padding: 0;
 }
-.rental-service-options li {
+.equipment .services-list .service-item, .equipment .services-list .extra-item, .equipment .services-list .insurance-item, .equipment .extras-list .service-item, .equipment .extras-list .extra-item, .equipment .extras-list .insurance-item, .equipment .insurance-list .service-item, .equipment .insurance-list .extra-item, .equipment .insurance-list .insurance-item {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 1rem;
-  border-bottom: 1px solid #f8f8f8;
-  margin-bottom: 0.5rem;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-bottom: 5px;
+  background-color: #fff;
 }
-.rental-service-options li:last-child {
-  border-bottom: none;
+.equipment .services-list .service-item input[type=checkbox], .equipment .services-list .extra-item input[type=checkbox], .equipment .services-list .insurance-item input[type=checkbox], .equipment .extras-list .service-item input[type=checkbox], .equipment .extras-list .extra-item input[type=checkbox], .equipment .extras-list .insurance-item input[type=checkbox], .equipment .insurance-list .service-item input[type=checkbox], .equipment .insurance-list .extra-item input[type=checkbox], .equipment .insurance-list .insurance-item input[type=checkbox] {
+  margin-right: 10px;
 }
-.rental-service-options input[type=checkbox] {
-  margin-right: 1rem;
+.equipment .submit-btn {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
-.rental-service-options .price {
-  font-weight: bold;
-  color: #ff4d30;
+.equipment .submit-btn:hover {
+  background-color: #0056b3;
 }
+.equipment .loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+}
+
 @media (max-width: 768px) {
-  .rental-service-options {
-    padding: 1rem;
+  .equipment {
+    padding: 10px;
   }
-  .rental-service-options ul {
-    padding: 0.5rem;
+  .equipment h2 {
+    font-size: 16px;
   }
-  .rental-service-options li {
-    flex-direction: column;
-    text-align: center;
-    padding: 0.5rem;
+  .equipment .service-item, .equipment .extra-item, .equipment .insurance-item {
+    padding: 8px;
+  }
+  .equipment .submit-btn {
+    padding: 8px 16px;
   }
 }
 @media (max-width: 480px) {
-  .rental-service-options h2 {
-    font-size: 1.2rem;
-  }
-  .rental-service-options .price {
-    font-size: 0.9rem;
+  .equipment h2 {
+    font-size: 14px;
   }
 }/*# sourceMappingURL=styles.css.map */

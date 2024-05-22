@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
+
 const Equipment = ({ onSubmit }) => {
     const [servicesIncluded, setServicesIncluded] = useState([]);
     const [extras, setExtras] = useState([]);
@@ -29,39 +30,39 @@ const Equipment = ({ onSubmit }) => {
     }, []);
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <div className="loader">Loading...</div>;
     }
 
     return (
-        <div className="rental-service-options">
-            <h2>Dahil Olan Hizmetler</h2>
-            <ul>
+        <div className="equipment">
+            <h2 className="title">Dahil Olan Hizmetler</h2>
+            <ul className="services-list">
                 {servicesIncluded.map((service, index) => (
-                    <li key={index}>
+                    <li key={index} className="service-item">
                         <input type="checkbox" checked={service.available} readOnly />
                         {service.equipmentName} - {service.equipmentPrice > 0 ? `$${service.equipmentPrice} ${service.equipmentPricingType.toLowerCase()}` : 'Free'}
                     </li>
                 ))}
             </ul>
-            <h2>Ekstralar (İsteğe bağlı)</h2>
-            <ul>
+            <h2 className="title">Ekstralar (İsteğe bağlı)</h2>
+            <ul className="extras-list">
                 {extras.map((extra, index) => (
-                    <li key={index}>
+                    <li key={index} className="extra-item">
                         <input type="checkbox" />
                         {extra.equipmentName} - ${extra.equipmentPrice} {extra.equipmentPricingType.toLowerCase()}
                     </li>
                 ))}
             </ul>
-            <h2>Güvenceler (İsteğe bağlı)</h2>
-            <ul>
+            <h2 className="title">Güvenceler (İsteğe bağlı)</h2>
+            <ul className="insurance-list">
                 {insuranceOptions.map((option, index) => (
-                    <li key={index}>
+                    <li key={index} className="insurance-item">
                         <input type="checkbox" />
                         {option.equipmentName} - ${option.equipmentPrice} {option.equipmentPricingType.toLowerCase()}
                     </li>
                 ))}
             </ul>
-            <button onClick={onSubmit}>Proceed to Reservation</button>
+            <button className="submit-btn" onClick={onSubmit}>Proceed to Reservation</button>
         </div>
     );
 };
