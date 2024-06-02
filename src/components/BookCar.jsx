@@ -15,6 +15,8 @@ function BookCar() {
   const [pickTime, setPickTime] = useState("");
   const [dropTime, setDropTime] = useState("");
 
+  const today = new Date().toISOString().split('T')[0];
+
   useEffect(() => {
     axios.get('/locations') // API endpoint URL'nizi girin
       .then(response => {
@@ -110,6 +112,8 @@ function BookCar() {
                     value={pickTime}
                     onChange={handlePickTime}
                     type="date"
+                    min={today}
+                    max={dropTime || "9999-12-31"}
                   ></input>
                 </div>
 
@@ -123,6 +127,7 @@ function BookCar() {
                     value={dropTime}
                     onChange={handleDropTime}
                     type="date"
+                    min={pickTime || today}
                   ></input>
                 </div>
 

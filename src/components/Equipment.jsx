@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-
-const Equipment = ({ onSubmit }) => {
+const Equipment = ({ onEquipmentSelect }) => {
     const [servicesIncluded, setServicesIncluded] = useState([]);
     const [extras, setExtras] = useState([]);
     const [insuranceOptions, setInsuranceOptions] = useState([]);
@@ -29,13 +28,22 @@ const Equipment = ({ onSubmit }) => {
         fetchData();
     }, []);
 
+    const handleSubmit = () => {
+        const selectedEquipment = {
+            servicesIncluded: servicesIncluded.filter(item => item.available),
+            extras: extras.filter(item => item.available),
+            insuranceOptions: insuranceOptions.filter(item => item.available)
+        };
+        onEquipmentSelect(selectedEquipment);
+    };
+
     if (loading) {
         return <div className="loader">Loading...</div>;
     }
 
     return (
         <div className="equipment">
-            <h2 className="title">Dahil Olan Hizmetler</h2>
+            <h2 className="title">Included Services</h2>
             <ul className="services-list">
                 {servicesIncluded.map((service, index) => (
                     <li key={index} className="service-item">
@@ -44,7 +52,7 @@ const Equipment = ({ onSubmit }) => {
                     </li>
                 ))}
             </ul>
-            <h2 className="title">Ekstralar (İsteğe bağlı)</h2>
+            <h2 className="title">Extras (Optional)</h2>
             <ul className="extras-list">
                 {extras.map((extra, index) => (
                     <li key={index} className="extra-item">
@@ -53,7 +61,7 @@ const Equipment = ({ onSubmit }) => {
                     </li>
                 ))}
             </ul>
-            <h2 className="title">Güvenceler (İsteğe bağlı)</h2>
+            <h2 className="title">Insurance Options (Optional)</h2>
             <ul className="insurance-list">
                 {insuranceOptions.map((option, index) => (
                     <li key={index} className="insurance-item">
@@ -62,7 +70,7 @@ const Equipment = ({ onSubmit }) => {
                     </li>
                 ))}
             </ul>
-            <button className="submit-btn" onClick={onSubmit}>Proceed to Reservation</button>
+            <button className="submit-btn" onClick={handleSubmit}>Proceed to Reservation</button>
         </div>
     );
 };
