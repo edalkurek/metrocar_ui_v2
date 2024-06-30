@@ -13,9 +13,9 @@ const Equipment = ({ onEquipmentSelect }) => {
                 const response = await axios.get('/equipments');
                 if (response.status === 200) {
                     const data = response.data;
-                    setServicesIncluded(data.filter(item => item.equipmentType === 'INCLUDED_SERVICES'));
-                    setExtras(data.filter(item => item.equipmentType === 'EXTRAS'));
-                    setInsuranceOptions(data.filter(item => item.equipmentType === 'INSURANCE_OPTIONS'));
+                    setServicesIncluded(data.filter(item => item.equipmentType === 'INCLUDED_SERVICES').map(item => ({ ...item, available: false })));
+                    setExtras(data.filter(item => item.equipmentType === 'EXTRAS').map(item => ({ ...item, available: false })));
+                    setInsuranceOptions(data.filter(item => item.equipmentType === 'INSURANCE_OPTIONS').map(item => ({ ...item, available: false })));
                 } else {
                     console.error('Failed to fetch equipment options');
                 }
@@ -27,6 +27,12 @@ const Equipment = ({ onEquipmentSelect }) => {
 
         fetchData();
     }, []);
+
+    const handleCheckboxChange = (list, setList, index) => {
+        const newList = [...list];
+        newList[index].available = !newList[index].available;
+        setList(newList);
+    };
 
     const handleSubmit = () => {
         const selectedEquipment = {
@@ -47,7 +53,11 @@ const Equipment = ({ onEquipmentSelect }) => {
             <ul className="services-list">
                 {servicesIncluded.map((service, index) => (
                     <li key={index} className="service-item">
-                        <input type="checkbox" checked={service.available} readOnly />
+                        <input
+                            type="checkbox"
+                            checked={service.available}
+                            onChange={() => handleCheckboxChange(servicesIncluded, setServicesIncluded, index)}
+                        />
                         {service.equipmentName} - {service.equipmentPrice > 0 ? `$${service.equipmentPrice} ${service.equipmentPricingType.toLowerCase()}` : 'Free'}
                     </li>
                 ))}
@@ -56,7 +66,11 @@ const Equipment = ({ onEquipmentSelect }) => {
             <ul className="extras-list">
                 {extras.map((extra, index) => (
                     <li key={index} className="extra-item">
-                        <input type="checkbox" />
+                        <input
+                            type="checkbox"
+                            checked={extra.available}
+                            onChange={() => handleCheckboxChange(extras, setExtras, index)}
+                        />
                         {extra.equipmentName} - ${extra.equipmentPrice} {extra.equipmentPricingType.toLowerCase()}
                     </li>
                 ))}
@@ -65,7 +79,11 @@ const Equipment = ({ onEquipmentSelect }) => {
             <ul className="insurance-list">
                 {insuranceOptions.map((option, index) => (
                     <li key={index} className="insurance-item">
-                        <input type="checkbox" />
+                        <input
+                            type="checkbox"
+                            checked={option.available}
+                            onChange={() => handleCheckboxChange(insuranceOptions, setInsuranceOptions, index)}
+                        />
                         {option.equipmentName} - ${option.equipmentPrice} {option.equipmentPricingType.toLowerCase()}
                     </li>
                 ))}

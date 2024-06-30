@@ -96,18 +96,6 @@ function Navbar() {
                 Contact
               </Link>
             </li>
-            <li>
-              {" "}
-              <Link className="contact-link" to="/reservation">
-                Reservation
-              </Link>
-            </li>
-            <li>
-              {" "}
-              <Link className="contact-link" to="/availableVehicle">
-                AvailableVehicle
-              </Link>
-            </li>
           </ul>
 
 

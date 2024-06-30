@@ -35,7 +35,7 @@ function CarCard(props) {
             </span>
           </div>
           <div className="models-div__box__descr__name-price__btn">
-          <button onClick={onBook}>Book Ride</button>
+          <button onClick={() => onBook(vehicle)}>Book Ride</button>
           </div>
         </div>
       </div>
