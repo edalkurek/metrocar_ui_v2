@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { IconInfoCircleFilled, IconX } from "@tabler/icons-react";
+import { IconX } from "@tabler/icons-react";
 import { IconMapPinFilled } from "@tabler/icons-react";
 import { IconCalendarEvent } from "@tabler/icons-react";
 import { useNavigate } from "react-router-dom";
@@ -27,17 +27,6 @@ function BookCar() {
       });
   }, []);
 
-  // open modal when all inputs are fulfilled
-
-  // disable page scroll when modal is displayed
-
-
-  // confirm modal booking
-  const confirmBooking = (e) => {
-    e.preventDefault();
-    const doneMsg = document.querySelector(".booking-done");
-    doneMsg.style.display = "flex";
-  };
 
   const openAvailableVehicle = (e) => {
     e.preventDefault();

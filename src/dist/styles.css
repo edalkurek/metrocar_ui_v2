@@ -2156,4 +2156,42 @@ footer {
   .equipment h2 {
     font-size: 14px;
   }
+}
+.summary {
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: 0 auto;
+}
+.summary .summary-section {
+  margin-bottom: 20px;
+}
+.summary .summary-section h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #333;
+  font-weight: bold;
+}
+.summary .summary-section p {
+  font-size: 16px;
+  margin: 5px 0;
+  color: #555;
+}
+.summary button {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  text-align: center;
+  width: 100%;
+}
+.summary button:hover {
+  background-color: #0056b3;
 }/*# sourceMappingURL=styles.css.map */

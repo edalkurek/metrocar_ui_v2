@@ -6,6 +6,8 @@ import ReservationInfo from "../components/ReservationInfo";
 import CarList from "../components/CarList";
 import Reservation from "../components/Reservation";
 import Equipment from "../components/Equipment";
+import Summary from "../components/Summary";
+import axios from 'axios';
 
 function AvailableVehicle() {
     const location = useLocation();
@@ -30,7 +32,40 @@ function AvailableVehicle() {
 
     const handleCustomerDetails = (details) => {
         setCustomerDetails(details);
+        console.log("Customer Details:", details);
         setCurrentStep(4); // Tüm adımlar tamamlandı, sonucu göster
+    };
+
+    const handleConfirm = async () => {
+        console.log("Selected Car:", selectedCar);
+        console.log("Selected Equipment:", selectedEquipment);
+        console.log("Customer Details:", customerDetails);
+        console.log("pickUp     :", pickUp);
+        console.log("dropOff    :", dropOff);
+
+
+        const reservationData = {
+            ...customerDetails,
+            vehicleId: selectedCar.id,
+            equipmentIds: selectedEquipment,
+            startDate: pickTime,
+            endDate: dropTime,
+            pickupLocation: pickUp,
+            dropoffLocation: dropOff
+        };
+        
+
+        try {
+            const response = await axios.post('/rentals', reservationData);
+            if (response.status === 200) {
+                console.log('Reservation successful');
+                // Başarılı mesajı gösterebilir veya başka bir işlemi yapabilirsiniz
+            } else {
+                console.error('Failed to submit reservation');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
     };
 
     return (
@@ -44,15 +79,14 @@ function AvailableVehicle() {
                 {currentStep === 2 && <Equipment onEquipmentSelect={handleEquipmentSelection} />}
                 {currentStep === 3 && <Reservation onCustomerDetails={handleCustomerDetails} />}
                 
-                {/* Sonuçları gösteren bölüm */}
                 {currentStep === 4 && (
-                    <div>
-                        <h2>Summary</h2>
-                        <p>Selected Car: {selectedCar.brand} {selectedCar.model}</p>
-                        <p>Selected Equipment: {Array.isArray(selectedEquipment) ? selectedEquipment.map(equip => equip.name).join(', ') : ''}</p>
-                        <p>Customer Name: {customerDetails.name}</p>
-                        <p>Customer Email: {customerDetails.email}</p>
-                    </div>
+                    <Summary 
+                        selectedCar={selectedCar} 
+                        selectedEquipment={selectedEquipment} 
+                        customerDetails={customerDetails} 
+                        reservationInfo={{ pickUp, dropOff, pickTime, dropTime }}
+                        onConfirm={handleConfirm}
+                    />
                 )}
 
                 <Footer />
