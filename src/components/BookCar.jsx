@@ -100,7 +100,7 @@ function BookCar() {
                     id="picktime"
                     value={pickTime}
                     onChange={handlePickTime}
-                    type="date"
+                    type="datetime-local"
                     min={today}
                     max={dropTime || "9999-12-31"}
                   ></input>
@@ -115,7 +115,7 @@ function BookCar() {
                     id="droptime"
                     value={dropTime}
                     onChange={handleDropTime}
-                    type="date"
+                    type="datetime-local"
                     min={pickTime || today}
                   ></input>
                 </div>
