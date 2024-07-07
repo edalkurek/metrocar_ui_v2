@@ -15,6 +15,7 @@ function Reservation({ onCustomerDetails }) {
   const [city, setCity] = useState("");
   const [address, setAddress] = useState("");
   const [flightInfo, setFlightInfo] = useState("");
+  const [paymentMethod, setPaymentMethod] = useState("");
 
   // taking value of modal inputs
   const handleName = (e) => {
@@ -57,11 +58,15 @@ function Reservation({ onCustomerDetails }) {
     setFlightInfo(e.target.value);
   };
 
+  const handlePaymentMethod = (e) => {
+    setPaymentMethod(e.target.value);
+  };
+
   const confirmBooking = (e) => {
     e.preventDefault();
     setModal(!modal);
     const customerData = {
-        name, surname, email, phoneNumber, birthDate, idCardNumber, country, city, address, flightInfo
+        name, surname, email, phoneNumber, birthDate, idCardNumber, country, city, address, flightInfo, paymentMethod
     };
     onCustomerDetails(customerData);
     const doneMsg = document.querySelector(".booking-done");
@@ -227,6 +232,20 @@ function Reservation({ onCustomerDetails }) {
                     type="text"
                     placeholder="Enter your flight info"
                   ></input>
+                  <p className="error-modal">This field is required.</p>
+                </span>
+              </div>
+
+              <div className="info-form__2col">
+                <span>
+                  <label>
+                    Payment Method <b>*</b>
+                  </label>
+                  <select value={paymentMethod} onChange={handlePaymentMethod}>
+                    <option value="" disabled>Select a payment method</option>
+                    <option value="CASH">Cash at Arrival</option>
+                    <option value="CREDIT_CARD">Credit Card at Arrival</option>
+                  </select>
                   <p className="error-modal">This field is required.</p>
                 </span>
               </div>
