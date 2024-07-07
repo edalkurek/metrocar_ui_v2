@@ -17,7 +17,7 @@ const Summary = ({ selectedCar, selectedEquipment, customerDetails, reservationI
                 <h3>Customer Details</h3>
                 <p>Name: {customerDetails.name}</p>
                 <p>Email: {customerDetails.email}</p>
-                <p>Phone: {customerDetails.phone}</p>
+                <p>Phone: {customerDetails.phoneNumber}</p>
             </div>
             <div className="summary-section">
                 <h3>Reservation Details</h3>
